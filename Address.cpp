@@ -1,7 +1,7 @@
 //Author: Joel Seda
 //CEN-4025-01Z
-//Homework 3
-//03-28-2021
+//Homework 3 and 4
+//04-18-2021
 
 #include "Address.h"
 
@@ -59,4 +59,9 @@ int Address::getZip()
 void Address::setZip(int zip)
 {
 	this->zip = zip;
+}
+
+std::string Address::GetFullAddress()
+{
+	return addressLine + ", " + city + ", " + state + " " + std::to_string(zip);
 }

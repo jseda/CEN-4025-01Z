@@ -1,7 +1,7 @@
 //Author: Joel Seda
 //CEN-4025-01Z
-//Homework 3
-//03-28-2021
+//Homework 3 and 4 and 4
+//04-18-2021
 
 #pragma once
 #include <string>
@@ -25,5 +25,6 @@ public:
 	void setState(std::string state);
 	int getZip();
 	void setZip(int zip);
+	std::string GetFullAddress();
 };
 

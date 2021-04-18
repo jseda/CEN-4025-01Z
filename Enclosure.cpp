@@ -1,10 +1,12 @@
 //Author: Joel Seda
 //CEN-4025-01Z
-//Homework 3
-//03-28-2021
+//Homework 3 and 4
+//04-18-2021
 
 #include "Enclosure.h"
 #include <stdio.h>
+#include "CommonStructs.h"
+#include <thread>
 
 Enclosure::Enclosure()
 {
@@ -15,6 +17,7 @@ Enclosure::Enclosure()
 	this->tempMin = 60;
 	this->temp = 72;
 	this->humidity = 40;
+	this->resetThreshold = 11;
 }
 
 int Enclosure::getId()
@@ -67,9 +70,36 @@ void Enclosure::setTempMax(int maxTemp)
 	this->tempMax = maxTemp;
 }
 
-void Enclosure::resetClimateControl()
-{
-	printf("Resetting Enclosure climate control...\n");
+bool Enclosure::resetClimateControl()
+{	
+	time_t startTime;
+	time_t endTime;
+	time(&startTime);
+	
+	std::chrono::seconds duration(10);
+	std::this_thread::sleep_for(duration);
+
+	time(&endTime);
+
+	int elapsedTime = difftime(endTime, startTime);
+	
+
+	printf("Enclosure %d resetting climate control...\n", this->id);
+
+	if (elapsedTime > resetThreshold)
+	{
+		return false;
+	}
+	else
+	{
+		this->tempFault = false;
+		this->tempMax = 78;
+		this->tempMin = 60;
+		this->temp = 75;
+		this->humidity = 40;
+
+		return true;
+	}
 }
 
 bool Enclosure::IsTempFault()
@@ -100,4 +130,24 @@ int Enclosure::getHumidity()
 void Enclosure::setHumidity(int humidity)
 {
 	this->humidity = humidity;
+}
+
+void Enclosure::setFaultType(TempFault tempFault)
+{
+	this->faultType = tempFault;
+}
+
+TempFault Enclosure::getFaultType()
+{
+	return this->faultType;
+}
+
+void Enclosure::setThreshold(int threshold)
+{
+	this->resetThreshold = threshold;
+}
+
+int Enclosure::getThreshold()
+{
+	return this->resetThreshold;
 }

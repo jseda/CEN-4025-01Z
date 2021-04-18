@@ -1,7 +1,7 @@
 //Author: Joel Seda
 //CEN-4025-01Z
-//Homework 3
-//03-28-2021
+//Homework 3 and 4
+//04-18-2021
 
 #include "Customer.h"
 #include <stdio.h>
@@ -13,7 +13,17 @@ Customer::Customer()
 	this->email = "12345@email.com";
 	this->name = "John";
 	this->phone = 1234567;
-	this->id = 0;
+	this->accountNum = 0;
+}
+
+Customer::Customer(std::string name, int age, Address address, uint32_t phone, std::string email, int id)
+{
+	this->address = address;
+	this->age = age;
+	this->email = email;
+	this->name = name;
+	this->phone = phone;
+	this->accountNum = id;
 }
 
 std::string Customer::getName()
@@ -46,12 +56,12 @@ void Customer::setAddress(Address address)
 	this->address = address;
 }
 
-int Customer::getPhone()
+uint32_t Customer::getPhone()
 {
 	return this->phone;
 }
 
-void Customer::setPhone(int phone)
+void Customer::setPhone(uint32_t phone)
 {
 	this->phone = phone;
 }
@@ -66,12 +76,12 @@ void Customer::setEmail(std::string email)
 	this->email = email;
 }
 
-int Customer::getId()
+int Customer::getAccountNum()
 {
-	return this->id;
+	return this->accountNum;
 }
 
-void Customer::setId(int id)
+void Customer::setAccountNum(int id)
 {
-	this->id = id;
+	this->accountNum = id;
 }
